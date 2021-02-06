@@ -1,11 +1,11 @@
-apiVersion: admissionregistration.k8s.io/v1beta1
+apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
   name: sidecar-injector-webhook-cfg
   labels:
     app: sidecar-injector
 webhooks:
-- name: sidecar-injector.morven.me
+- name: sidecar-injector.kenny.me
   clientConfig:
     service:
       name: sidecar-injector-webhook-svc
@@ -20,3 +20,5 @@ webhooks:
   namespaceSelector:
     matchLabels:
       sidecar-injection: enabled
+  admissionReviewVersions: ["v1", "v1beta1"]
+  sideEffects: None
