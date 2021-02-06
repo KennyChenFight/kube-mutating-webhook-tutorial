@@ -286,15 +286,21 @@ func (whsvr *WebhookServer) Serve(w http.ResponseWriter, r *http.Request) {
 		admissionResponse = whsvr.mutate(&ar)
 	}
 
-	admissionReview := admissionv1.AdmissionReview{}
+	webhookResponse := struct {
+		ApiVersion string                         `json:"apiVersion"`
+		Kind       string                         `json:"kind"`
+		Response   *admissionv1.AdmissionResponse `json:"response"`
+	}{}
 	if admissionResponse != nil {
-		admissionReview.Response = admissionResponse
+		webhookResponse.Response = admissionResponse
 		if ar.Request != nil {
-			admissionReview.Response.UID = ar.Request.UID
+			webhookResponse.Response.UID = ar.Request.UID
 		}
 	}
-
-	resp, err := json.Marshal(admissionReview)
+	webhookResponse.ApiVersion = "admission.k8s.io/v1"
+	webhookResponse.Kind = "AdmissionReview"
+	resp, err := json.Marshal(webhookResponse)
+	log.Printf("webhook response: %v", string(resp))
 	if err != nil {
 		log.Printf("Can't encode response: %v", err)
 		http.Error(w, fmt.Sprintf("could not encode response: %v", err), http.StatusInternalServerError)
