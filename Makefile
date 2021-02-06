@@ -1,9 +1,6 @@
-# Image URL to use all building/pushing image targets;
-# Use your own docker registry and image name for dev/test by overridding the
-# IMAGE_REPO, IMAGE_NAME and IMAGE_TAG environment variable.
 IMAGE_REPO ?= docker.io/kennychenfight
 IMAGE_NAME ?= sidecar-injector
-IMAGE_TAG ?= $(shell date +v%Y%m%d%s)
+IMAGE_TAG ?= $(shell date +v%Y%m%d)
 
 .PHONY: all
 all: build image
