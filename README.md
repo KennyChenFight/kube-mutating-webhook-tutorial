@@ -2,14 +2,6 @@
 
 This tutoral shows how to build and deploy a *MutatingAdmissionWebhook* that injects a nginx sidecar container into pod prior to persistence of the object.
 
-## Prerequisites
-
-- [git](https://git-scm.com/downloads)
-- [go](https://golang.org/dl/) version v1.12+
-- [docker](https://docs.docker.com/install/) version 17.03+
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) version v1.11.3+
-- Access to a Kubernetes v1.11.3+ cluster with the `admissionregistration.k8s.io/v1beta1` API enabled. Verify that by the following command:
-
 ```
 kubectl api-versions | grep admissionregistration.k8s.io
 ```
