@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: sidecar-injector
-          image: morvencao/sidecar-injector:latest
-          imagePullPolicy: IfNotPresent
+          image: kennychenfight/sidecar-injector:latest
+          imagePullPolicy: Always
           args:
           - -sidecarCfgFile=/etc/webhook/config/sidecarconfig.yaml
           - -tlsCertFile=/etc/webhook/certs/cert.pem
